@@ -1,0 +1,32 @@
+{
+  "name": "restify-json-schema-validation-middleware",
+  "version": "1.0.0",
+  "description": "Middleware to validate incoming requests using json schema",
+  "main": "index.js",
+  "repository": "https://github.com/CanTireInnovations/restify-json-schema-validation-middleware",
+  "scripts": {
+    "ci": "npm run lint && npm test",
+    "lint": "eslint .",
+    "test": "mocha"
+  },
+  "keywords": [
+    "jsonschema",
+    "restify",
+    "validation"
+  ],
+  "author": "Canadian Tire Innovations",
+  "license": "MIT",
+  "dependencies": {
+    "json-schema-validation-middleware": "^4.3.1",
+    "lodash": "^4.2.1",
+    "tv4": "^1.2.7",
+    "tv4-formats": "^1.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^1.7.1",
+    "mocha": "^2.4.5",
+    "restify": "^4.0.3",
+    "sinon": "^1.17.3"
+  }
+}

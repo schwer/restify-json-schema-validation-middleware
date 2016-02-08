@@ -74,6 +74,17 @@ function matchCustomError( message, options ) {
     );
 }
 
+function matchRawError( message ) {
+
+    const data = {
+        message
+    };
+
+    return sinon.match.instanceOf( Error ).and(
+        sinon.match( data )
+    );
+}
+
 // -----------------------------------------------------------------------------
 
 describe( 'middlewareTests', function() {
@@ -130,6 +141,7 @@ describe( 'middlewareTests', function() {
                 };
 
                 const expectedRestifyMessage = 'missing required property: test';
+                const expectedRawMessage = 'Missing required property: test';
 
                 const middleware = middlewareLib( config )( testSchema );
 
@@ -137,7 +149,7 @@ describe( 'middlewareTests', function() {
 
                 sinon.assert.callCount( next, 0 );
                 sinon.assert.calledOnce( errorHandler );
-                sinon.assert.calledWithExactly( errorHandler, matchRestifyError( expectedRestifyMessage ), res, next );
+                sinon.assert.calledWithExactly( errorHandler, matchRestifyError( expectedRestifyMessage ), matchRawError( expectedRawMessage ), res, next );
             } );
         } );
 
@@ -375,6 +387,7 @@ describe( 'middlewareTests', function() {
                 };
 
                 const expectedRestifyMessage = 'missing required property: test';
+                const expectedRawMessage = 'Missing required property: test';
 
                 const middleware = middlewareLib( config )( testSchema, options );
 
@@ -383,7 +396,7 @@ describe( 'middlewareTests', function() {
                 sinon.assert.callCount( next, 0 );
                 sinon.assert.callCount( errorHandlerConfig, 0 );
                 sinon.assert.calledOnce( errorHandlerOptions );
-                sinon.assert.calledWithExactly( errorHandlerOptions, matchRestifyError( expectedRestifyMessage ), res, next );
+                sinon.assert.calledWithExactly( errorHandlerOptions, matchRestifyError( expectedRestifyMessage ), matchRawError( expectedRawMessage ), res, next );
             } );
         } );
 

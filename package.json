@@ -17,7 +17,6 @@
   "author": "Canadian Tire Innovations",
   "license": "MIT",
   "dependencies": {
-    "json-schema-validation-middleware": "^4.3.1",
     "lodash": "^4.2.1",
     "tv4": "^1.2.7",
     "tv4-formats": "^1.0.2"
@@ -28,5 +27,8 @@
     "mocha": "^2.4.5",
     "restify": "^4.0.3",
     "sinon": "^1.17.3"
+  },
+  "peerDependencies": {
+    "restify": "^4.0.3"
   }
 }

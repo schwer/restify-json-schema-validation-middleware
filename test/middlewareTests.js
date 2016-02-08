@@ -327,6 +327,30 @@ describe( 'middlewareTests', function() {
                 sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed: test2' ) );
             } );
         } );
+
+        describe( 'checkOnly passed', function() {
+            it( 'should return error message, formatted using custom formatter, but other formatters should not be changed', function() {
+
+                const req = {
+                    body: {
+                        test: 'test',
+                        test2: ''
+                    }
+                };
+                const next = sinon.spy();
+
+                const config = {
+                    checkOnly: 'body'
+                };
+
+                const middleware = middlewareLib( config )( testSchema );
+
+                middleware( req, {}, next );
+
+                sinon.assert.calledOnce( next );
+                sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed: test2' ) );
+            } );
+        } );
     } );
 
     // -------------------------------------------------------------------------
@@ -582,6 +606,34 @@ describe( 'middlewareTests', function() {
                 next.reset();
 
                 middleware( { test: '', test2: 'test2' }, {}, next );
+
+                sinon.assert.calledOnce( next );
+                sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed: test2' ) );
+            } );
+        } );
+
+        describe( 'checkOnly passed', function() {
+            it( 'should return error message, formatted using custom formatter, but other formatters should not be changed', function() {
+
+                const req = {
+                    body: {
+                        test: 'test',
+                        test2: ''
+                    }
+                };
+                const next = sinon.spy();
+
+                const config = {
+                    checkOnly: 'headers'
+                };
+
+                const options = {
+                    checkOnly: 'body'
+                };
+
+                const middleware = middlewareLib( config )( testSchema, options );
+
+                middleware( req, {}, next );
 
                 sinon.assert.calledOnce( next );
                 sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed: test2' ) );

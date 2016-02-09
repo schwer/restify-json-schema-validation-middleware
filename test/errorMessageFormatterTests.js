@@ -199,7 +199,7 @@ describe( 'errorMessageFormatterTests', function() {
             const error = getError( data, schema );
             const message = errorMessageFormatter.format( error );
 
-            assert.equal( message, 'format validation failed (data is invalid): test' );
+            assert.equal( message, 'format validation failed (Data is invalid): test' );
         } );
     } );
 } );

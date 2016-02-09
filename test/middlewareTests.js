@@ -296,7 +296,7 @@ describe( 'middlewareTests', function() {
                 middleware( { test: '', test2: 'test2' }, {}, next );
 
                 sinon.assert.calledOnce( next );
-                sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed' ) );
+                sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed: test2' ) );
             } );
         } );
 
@@ -573,7 +573,7 @@ describe( 'middlewareTests', function() {
                 middleware( { test: '', test2: 'test2' }, {}, next );
 
                 sinon.assert.calledOnce( next );
-                sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed' ) );
+                sinon.assert.calledWithExactly( next, matchRestifyError( 'additional properties not allowed: test2' ) );
             } );
         } );
 

@@ -1,6 +1,6 @@
 {
   "name": "restify-json-schema-validation-middleware",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Middleware to validate incoming requests using json schema and respond with restify error",
   "main": "index.js",
   "repository": "https://github.com/CanTireInnovations/restify-json-schema-validation-middleware",

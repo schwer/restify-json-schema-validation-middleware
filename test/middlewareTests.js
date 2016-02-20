@@ -1,11 +1,9 @@
 'use strict';
 
-const _ = require( 'lodash' );
 const assert = require( 'chai' ).assert;
 const restify = require( 'restify' );
 const sinon = require( 'sinon' );
 
-const errorMessageFormatter = require( '../lib/errorMessageFormatter.js' );
 const middlewareLib = require( '..' );
 
 const res = Object.freeze( {} );
@@ -22,7 +20,6 @@ function matchError( message ) {
         return true;
     } );
 }
-
 
 describe( 'middlewareTests', function() {
 
@@ -175,6 +172,36 @@ describe( 'middlewareTests', function() {
                 } );
             } );
 
+        } );
+    } );
+
+    describe( 'config.banUnknownProperties', function() {
+        it( 'should ban unknown properties', function() {
+
+            const req = {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: {
+                    hello: 'world'
+                }
+            };
+
+            const schema = {
+                type: 'object',
+                properties: {
+                    body: { type: 'object' }
+                },
+                required: [ 'body' ]
+            };
+
+            const middleware = middlewareLib( { banUnknownProperties: true } )( schema );
+
+            const next = sinon.spy();
+            middleware( req, res, next );
+
+            sinon.assert.calledOnce( next );
+            sinon.assert.calledWithExactly( next, matchError( 'request.headers: unknown property (not in schema)' ) );
         } );
     } );
 } );

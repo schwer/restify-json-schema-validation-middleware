@@ -55,7 +55,7 @@ server.post(
 
 `banUnknownProperties`: boolean of whether or not to ban unknown properties
  
-```
+```JavaScript
 const validator = require( 'restify-json-schema-validation-middleware' )( {
     banUnknownProperties: true
 } );

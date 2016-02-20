@@ -9,21 +9,10 @@ Middleware to validate incoming requests using json schema and respond with [res
 ```JavaScript
 const validator = require( 'restify-json-schema-validation-middleware' )();
 
-const headersSchema = {
-    type: 'object'
-};
-
-const bodySchema = {
-    type: 'object'
-};
-
-const querySchema = {
-    type: 'object'
-};
-
-const paramsSchema = {
-    type: 'object'
-};
+const headersSchema = { type: 'object' };
+const bodySchema = { type: 'object' };
+const querySchema = { type: 'object' };
+const paramsSchema = { type: 'object' };
 
 server.post(
     '/path',

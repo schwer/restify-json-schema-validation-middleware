@@ -4,39 +4,60 @@ Middleware to validate incoming requests using json schema and respond with [res
 
 ## Usage
 
+### Partial request validation
+
 ```JavaScript
 const validator = require( 'restify-json-schema-validation-middleware' )();
 
-const sampleSchema = {
-    type: 'object',
-    properties: {
-        body: { type: 'object' }
-    },
-    required: [ 'body' ]
+const headersSchema = {
+    type: 'object'
 };
 
-server.post( '/path', validator( sampleSchema ), function( req, res, next ) { /* */ } );
+const bodySchema = {
+    type: 'object'
+};
+
+const querySchema = {
+    type: 'object'
+};
+
+const paramsSchema = {
+    type: 'object'
+};
+
+server.post(
+    '/path',
+    validator.headers( headersSchema ),
+    validator.body( bodySchema ),
+    validator.query( querySchema ),
+    validator.params( paramsSchema ),
+    function( req, res, next ) {
+        ...
+    }
+);
 ```
 
-You can pass optional global config object:
+### Full request validation
+
 ```JavaScript
-const validator = require( 'restify-json-schema-validation-middleware' )( config );
+const validator = require( 'restify-json-schema-validation-middleware' )();
+
+const schema = {
+    type: 'object',
+    properties: {
+        headers: { type: 'object' },
+        body: { type: 'object' },
+        query: { type: 'object' }
+        params: { type: 'object' }
+    },
+    required: [ 'headers' ]
+};
+
+server.post(
+    '/path',
+    validator( schema ),
+    function( req, res, next ) {
+        ...
+    }
+);
 ```
-
-Or optional one-time options:
-```JavaScript
-server.post( '/path', validator( sampleSchema, options ), function( req, res, next ) { /* */ } );
-```
-
-## Config and Options
-Both `config` and `options` have the same properties, but if some property is provided in `options`, it overrides corresponding one from `config`.
-
-* `errorHandler`: Instead of responding with an error, library will call custom callback `errorHandler( formattedError, rawError, res, next )`.
-* `errorClass`: Error class to be used instead of default `restify.BadRequestError` class. Must take `message` as the first constructor parameter.
-* `checkOnly`: Takes specified property (can be path) from the request object and performs check against it.
-* `addMessageFormatters`: Adds and/or overrides some of the existing error formatters.
-* `replaceMessageFormatters`: Removes all the existing error formatters and replaces them with the provided ones.
-* `embedValidationError`: Embeds raw validation error into the error response.
-* `embedValidationErrorCode`: Embeds validation error code into the error response.
-
-See tests for more examples.

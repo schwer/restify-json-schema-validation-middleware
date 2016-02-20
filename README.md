@@ -50,3 +50,13 @@ server.post(
     }
 );
 ```
+
+## Options
+
+`banUnknownProperties`: boolean of whether or not to ban unknown properties
+ 
+```
+const validator = require( 'restify-json-schema-validation-middleware' )( {
+    banUnknownProperties: true
+} );
+```

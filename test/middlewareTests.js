@@ -87,7 +87,7 @@ describe( 'middlewareTests', function() {
 
     } );
 
-    [ 'headers', 'body', 'query', 'params' ].forEach( function( basePath ) {
+    [ 'headers', 'body', 'query', 'params', 'files' ].forEach( function( basePath ) {
 
         describe( basePath, function() {
 

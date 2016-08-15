@@ -13,6 +13,7 @@ const headersSchema = { type: 'object' };
 const bodySchema = { type: 'object' };
 const querySchema = { type: 'object' };
 const paramsSchema = { type: 'object' };
+const filesSchema = { type: 'object' };
 
 server.post(
     '/path',
@@ -20,6 +21,7 @@ server.post(
     validator.body( bodySchema ),
     validator.query( querySchema ),
     validator.params( paramsSchema ),
+    validator.files( filesSchema ),
     function( req, res, next ) {
         ...
     }
@@ -36,8 +38,9 @@ const schema = {
     properties: {
         headers: { type: 'object' },
         body: { type: 'object' },
-        query: { type: 'object' }
-        params: { type: 'object' }
+        query: { type: 'object' },
+        params: { type: 'object' },
+        files: { type: 'object' }
     },
     required: [ 'headers' ]
 };

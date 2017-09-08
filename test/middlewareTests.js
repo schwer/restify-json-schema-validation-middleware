@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require( 'chai' ).assert;
-const restify = require( 'restify' );
+const restifyErrors = require( 'restify-errors' );
 const sinon = require( 'sinon' );
 
 const middlewareLib = require( '..' );
@@ -11,9 +11,9 @@ const res = Object.freeze( {} );
 function matchError( message ) {
     return sinon.match( function( err ) {
 
-        assert.instanceOf( err, restify.BadRequestError );
+        assert.instanceOf( err, restifyErrors.BadRequestError );
         assert.deepEqual( err.body, {
-            code: 'BadRequestError',
+            code: 'BadRequest',
             message
         } );
 

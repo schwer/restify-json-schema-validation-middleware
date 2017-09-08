@@ -1,6 +1,6 @@
 {
   "name": "restify-json-schema-validation-middleware",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Middleware to validate incoming requests using json schema and respond with restify error",
   "main": "index.js",
   "repository": "https://github.com/CanTireInnovations/restify-json-schema-validation-middleware",
@@ -26,10 +26,9 @@
     "eslint": "^3.3.0",
     "eslint-config-cti": "^1.0.2",
     "mocha": "^3.0.2",
-    "restify": "^4.0.3",
     "sinon": "^1.17.3"
   },
   "peerDependencies": {
-    "restify": "^4.0.3"
+    "restify-errors": "^5.0.0"
   }
 }
